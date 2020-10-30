@@ -148,7 +148,7 @@ public class Ej4 extends javax.swing.JFrame {
         if(jCheckBox7.isSelected()){
            frutas += "7";
         }
-
+//asfasfads
 
         new JOptionPane().showMessageDialog(rootPane, frutas);
     }//GEN-LAST:event_jButton1ActionPerformed
