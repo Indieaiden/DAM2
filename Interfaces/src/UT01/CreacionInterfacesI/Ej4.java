@@ -5,6 +5,8 @@
  */
 package UT01.CreacionInterfacesI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DAM-Aiden
@@ -27,21 +29,129 @@ public class Ej4 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Frutas favoritas");
+
+        jCheckBox1.setText("jCheckBox1");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox2.setText("jCheckBox2");
+
+        jCheckBox3.setText("jCheckBox3");
+
+        jCheckBox4.setText("jCheckBox4");
+
+        jCheckBox5.setText("jCheckBox5");
+
+        jCheckBox6.setText("jCheckBox6");
+
+        jCheckBox7.setText("jCheckBox7");
+
+        jButton1.setText("Frutas favoritas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCheckBox4)
+                            .addComponent(jCheckBox3)
+                            .addComponent(jCheckBox2)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jLabel1))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox5)
+                            .addComponent(jCheckBox6)
+                            .addComponent(jCheckBox7)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jButton1)))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBox7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox4)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+               String frutas = "Has seleccionado:" + "\n";
+        
+        if(jCheckBox1.isSelected()){
+            frutas += "1";
+        }
+        if(jCheckBox2.isSelected()){
+            frutas += "2";
+        }
+        if(jCheckBox3.isSelected()){
+           frutas += "3";
+        }
+        if(jCheckBox4.isSelected()){
+           frutas += "4";
+        }
+        if(jCheckBox5.isSelected()){
+           frutas += "5";
+        }if(jCheckBox6.isSelected()){
+           frutas += "6";
+        }
+        if(jCheckBox7.isSelected()){
+           frutas += "7";
+        }
+
+
+        new JOptionPane().showMessageDialog(rootPane, frutas);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +189,14 @@ public class Ej4 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

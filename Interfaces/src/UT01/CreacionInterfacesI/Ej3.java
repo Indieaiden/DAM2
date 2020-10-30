@@ -5,6 +5,8 @@
  */
 package UT01.CreacionInterfacesI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DAM-Aiden
@@ -27,22 +29,92 @@ public class Ej3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        rosa = new javax.swing.JRadioButton();
+        morado = new javax.swing.JRadioButton();
+        arcoiris = new javax.swing.JRadioButton();
+        negro = new javax.swing.JRadioButton();
+        boton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("¿Cual es tu color favorito?");
+
+        buttonGroup1.add(rosa);
+        rosa.setText("Rosa");
+
+        buttonGroup1.add(morado);
+        morado.setText("Morado");
+
+        buttonGroup1.add(arcoiris);
+        arcoiris.setText("Arcoíris");
+
+        buttonGroup1.add(negro);
+        negro.setText("Negro");
+
+        boton.setText("Enviar");
+        boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rosa)
+                            .addComponent(morado)
+                            .addComponent(arcoiris)
+                            .addComponent(negro)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(boton)))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(rosa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(morado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(arcoiris)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(negro)
+                .addGap(18, 18, 18)
+                .addComponent(boton)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane panel = new JOptionPane();
+        if(rosa.isSelected()){
+        panel.showMessageDialog(rootPane, "Has seleccionado rosa");
+     }else if(morado.isSelected()){
+         panel.showMessageDialog(rootPane, "Has seleccionado morado");
+     }else if(arcoiris.isSelected()){
+         panel.showMessageDialog(rootPane, "Has seleccionado arcoiris");
+     }else if(negro.isSelected()){
+         panel.showMessageDialog(rootPane, "Has seleccionado negro");        
+    }//GEN-LAST:event_botonActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -79,5 +151,12 @@ public class Ej3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton arcoiris;
+    private javax.swing.JButton boton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton morado;
+    private javax.swing.JRadioButton negro;
+    private javax.swing.JRadioButton rosa;
     // End of variables declaration//GEN-END:variables
 }
