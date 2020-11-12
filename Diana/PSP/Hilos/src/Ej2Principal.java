@@ -39,6 +39,8 @@ public class Ej2Principal {
         System.out.println("Dato incorrecto");
     }
     */
+
+    
     //Declaracion de variables
     static int dinero;
 
