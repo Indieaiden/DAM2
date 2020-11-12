@@ -9,7 +9,7 @@ public class Ej3HiloImprimir implements Runnable{
     
     @Override
 	public void run() {
-        System.out.println(cadena);
+        //System.out.println(cadena);
         /*
         File fichero =new File("ficheroEj3·.txt");
         fichero.createNewFile();
