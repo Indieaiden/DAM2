@@ -1,0 +1,1 @@
+El minimo de la lista es: 0
