@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -223,22 +224,15 @@ public class Inicio extends javax.swing.JFrame {
 
     private void listaralumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaralumnoActionPerformed
         // LISTAR ALUMNOS
-        //System.out.println("Hola");
+        //Muestro los alumnos en una tabla dentro del JPanel
         JTable tabla = new JTable();
         DefaultTableModel modelo = (DefaultTableModel)tabla.getModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellidos");
         modelo.addColumn("Telefono");
         
-        Object [] fila = new Object[3];
-        fila[0] = "dato1";
-        fila[1] = "dato2";
-        fila[2] = "dato3";
-        modelo.addRow ( fila ); // Añade una fila al final
-        //modelo.setValueAt ("nuevo valor", 0, 1); // Cambia el valor de la fila 1, columna 2.
-        //modelo.removeRow (0); // Borra la primera fila
-      
         try {
+            //Leo los datos del fichero alumnos
             FileReader fr = new FileReader(arc_alumnos);
             BufferedReader br = new BufferedReader(fr);
             String linea;
@@ -246,9 +240,15 @@ public class Inicio extends javax.swing.JFrame {
             while((linea = br.readLine())!= null){
                 //System.out.println(linea);
                 //Añade a la tabla
+                //Creo el objeto fila para formatear los datos
                 Object [] fila_al = new Object[3];
                 //El formato de la linea es ID;NOMBRE;APELLIDO;DIRECCION;TELEFONO;
                 String[] arraystr = linea.split(";");
+                //Los datos pueden tener espacios así que los trimeo
+                for (String string : arraystr) {
+                    string = string.trim();
+                }
+                //Añado nombre, apellidos y Telefono a la tabla
                 fila_al[0]=arraystr[1];
                 fila_al[1]=arraystr[2];
                 fila_al[2]=arraystr[4];
@@ -261,19 +261,52 @@ public class Inicio extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         } 
+        //Aqui deberia enseñar la tabla y añadir cosas al JPanel pero no funciona
+        //Hay que quitar el panel actual y poner el nuevo.
     }//GEN-LAST:event_listaralumnoActionPerformed
 
     private void aniadiralumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadiralumnoActionPerformed
         // AÑADIR ALUMNO:
-        //Creamos unos campos de texto y unos botones
-        JLabel nombre, apellidos, direccion, telefono;
-        JTextField nombretf, apellidostf, direcciontf;
-        JSlider telefonojs;
-        JComboBox profesores;
+        //Creamos los componentes necesarios para introducir un alumno
+        JLabel nombrelb = new JLabel(), apellidoslb = new JLabel(), direccionlb = new JLabel(), telefonolb = new JLabel();
+        JTextField nombretf = new JTextField(), apellidostf = new JTextField(), direcciontf = new JTextField();
+        JSlider telefonojs = new JSlider();
+        JComboBox profesores = new JComboBox();
+        //El id se calcula cada vez que se ejecuta este metodo
         id_alumno++;
         //Añadir y formatear a un JPanel
         //Crear Alumno
-        
+        try {
+            //Leo los datos del fichero alumnos
+            RandomAccessFile raf = new RandomAccessFile(arc_alumnos, "w"); 
+            StringBuffer buffer = null;
+            //Escribimos los datos en el fichero
+            raf.writeInt(id_alumno);
+            //Vamos a usar ; para separar cada dato
+            raf.writeChar(';');
+            //Hacemos que todos los datos ocupen 10 caracteres
+            //Para todos los datos de texto hacemos lo mismo así que los meto en un array de strings
+            String[] datostext = new String[]{nombretf.getText(), apellidostf.getText(),
+                                              direcciontf.getText(),Integer.toString(telefonojs.getValue())};
+                    
+            for (int i = 0; i < datostext.length; i++) {
+                buffer = new StringBuffer(datostext[i]);
+                buffer.setLength(10);
+                raf.writeChars(buffer.toString());
+                raf.writeChar(';');
+            }
+            
+            raf.writeInt(1);
+            raf.writeBytes("\r\n");
+            //CUENTA TOTAL DE BYTES PARA ACCEDER EN LOS OTROS METODOS
+            // INT + ; + (10*CHAR + ;)*4 + INT + CHAR*4
+            // 4 + 2 + (10*2 + 2)*4 + 4 + 2*4 = 106 BYTES POR ALUMNO 
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         
     }//GEN-LAST:event_aniadiralumnoActionPerformed
 
