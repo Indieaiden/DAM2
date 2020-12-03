@@ -1,0 +1,6 @@
+Procesos:
+Es un archivo que está en ejecución y bajo el control del sistema operativo. Un proceso puede atravesar 
+diversas etapas en su «ciclo de vida». Los estados en los que puede estar son:
+-En ejecución.
+-Pausado/detenido/en espera.
+-Interrumpido.
