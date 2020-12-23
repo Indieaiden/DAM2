@@ -104,8 +104,12 @@ public class Ej10 extends JFrame {
 				try {
 					BufferedWriter bw = new BufferedWriter(new FileWriter("datos.txt"));
 					
-					for (int i = 0; i <11; i++) {
-						bw.write("");
+					for (int i=0; i<table.getRowCount(); i++) {  //recorre las filas
+						for (int j=0; j<table.getModel().getColumnCount(); j++) {  //recorre las columnas
+							String datos = table.getModel().getValueAt(i, j).toString();
+							bw.write(datos);
+							bw.write("/n");
+						}
 					}
 					
 					bw.close();
@@ -147,7 +151,6 @@ public class Ej10 extends JFrame {
 			String linea;
 			
 			while((linea = in.readLine()) != null) {  //si la linea leida no es null, seguir
-				//leo nombre
 				
 				for (int i=0; i<fila.length; i++) {  //4 veces
 					
