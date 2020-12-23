@@ -6,6 +6,9 @@
 package ejercicio10_tablas;
 
 import java.awt.Dialog;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,8 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Jorge
  */
 public class Tabla extends javax.swing.JFrame {
-
-    
+   
     
     public Tabla() {
         initComponents();
@@ -34,9 +36,9 @@ public class Tabla extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Aniadir = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,38 +49,31 @@ public class Tabla extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Apellidos", "Direccion", "Telefono"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         table.setColumnSelectionAllowed(true);
         table.setName(""); // NOI18N
+        table.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(table);
         table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jButton1.setText("Añadir Fila");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Aniadir.setText("Añadir Fila");
+        Aniadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AniadirActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Eliminar filas seleccionadas");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setText("Eliminar filas seleccionadas");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Guardar datos");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setText("Guardar datos");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
 
@@ -92,11 +87,11 @@ public class Tabla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(Aniadir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(Eliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(Guardar)
                 .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
@@ -106,36 +101,45 @@ public class Tabla extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(Aniadir)
+                    .addComponent(Eliminar)
+                    .addComponent(Guardar))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AniadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AniadirActionPerformed
         // TODO add your handling code here:
-        //Insertar insertar = new Insertar();
-        //insertar.setVisible(true);
-       Object [] fila = new Object[Tabla.table.getModel().getColumnCount()];
-       fila[0] = "las";
-       fila[1] = "filas";
-       fila[2] = "go";
-       fila[3] = "brrrr";
-       
-       DefaultTableModel dt = (DefaultTableModel) table.getModel();
-       dt.addRow(fila);
-       
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+       //Aqui hay que abrir el nuevo JPanel e introducir los datos
+       Insertar insertar = new Insertar();
+       insertar.setVisible(true);
+       //Pos no inserta y no sé por qué
+    }//GEN-LAST:event_AniadirActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        File archivo = new File("tabla.txt");
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("tabla.txt"));
+            
+            for (int i = 0; i < table.getModel().getRowCount(); i++) {
+                for (int j = 0; j < table.getModel().getColumnCount(); j++) {
+                    String dato = table.getModel().getValueAt(i, j).toString();
+                    bw.write(dato);
+                }
+            }
+            bw.close();
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Tabla.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_GuardarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
         //ELMINAR
         
@@ -146,7 +150,7 @@ public class Tabla extends javax.swing.JFrame {
             dt.removeRow(numFilas[i]);
         }
                 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_EliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,9 +188,9 @@ public class Tabla extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Aniadir;
+    private javax.swing.JButton Eliminar;
+    private javax.swing.JButton Guardar;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
